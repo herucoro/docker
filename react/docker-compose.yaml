@@ -1,15 +1,19 @@
 version: '3.7'
 services:    
-    node_modules:
+    app:
         build: .        
         container_name: react
         volumes:
-            - node_modules_volume:/root/src
+            - react_app_volume:/root/src
         tty: true
         hostname: react         
         ports: 
             - 3000:3000
+            - 80:80
         restart: always
+        privileged: true
+        command: /sbin/init
 
 volumes: 
-    node_modules_volume:
+    react_app_volume:
+        external: true

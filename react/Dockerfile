@@ -1,17 +1,17 @@
-FROM node:14.17.1
+FROM almalinux:latest
 USER root
 
-RUN apt-get update
-RUN apt-get -y install locales && \
-    localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
-RUN apt-get install -y vim less
-
-RUN apt update
+RUN dnf update -y
+RUN yum update -y
+RUN dnf install -y vim nodejs npm httpd httpd-tools httpd-devel httpd-manual
+RUN dnf module reset nodejs -y
+RUN dnf module install nodejs:14 -y
 
 ENV TZ JST-9
 ENV TERM xterm
 
 RUN mkdir -p /root/src
+RUN mkdir -p /root/src/download
 
 WORKDIR /root/src
 
