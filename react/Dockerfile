@@ -3,7 +3,7 @@ USER root
 
 RUN dnf update -y
 RUN yum update -y
-RUN dnf install -y vim nodejs npm httpd httpd-tools httpd-devel httpd-manual
+RUN dnf install -y vim nodejs npm httpd httpd-tools httpd-devel httpd-manual git
 RUN dnf module reset nodejs -y
 RUN dnf module install nodejs:14 -y
 
