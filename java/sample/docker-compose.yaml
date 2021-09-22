@@ -2,27 +2,28 @@ version: '3.7'
 services:
     db:
         image: postgres:13.4
-        container_name: postgres
-        ports:
-            - 5432:5432
+        container_name: sb_db
+        # ports:
+            # - 5432:5432
         volumes:
             - postgres_volume:/var/lib/postgresql/data
         environment:
-            POSTGRES_USER: root
-            POSTGRES_PASSWORD: root
+            POSTGRES_USER: dev
+            POSTGRES_PASSWORD: password
             POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-        hostname: postgres
-        user: root
+        restart: always
 
     java:
         build: .
+        # image: amazonlinux:latest
+        container_name: sb_app
         ports: 
-            - 8000:8000
+            - 8080:8080
         tty: true
-        volumes: 
-            - ${SRC_PATH}:/root/src
+        privileged: true               
         depends_on: 
             - db
+        restart: always           
 
 volumes:
     postgres_volume:
