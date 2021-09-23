@@ -1,15 +1,21 @@
-FROM centos:latest
+FROM almalinux:latest
 USER root
 
 RUN dnf update -y
 RUN yum update -y
-RUN dnf install wget tar -y
+RUN dnf install wget tar git -y
 
-RUN mkdir -p /root/src/download
-RUN wget -P /root/src/download https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz
+RUN mkdir /usr/local/src/download
+RUN cd /usr/local/src/download
 
-WORKDIR /root/src
+RUN wget https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz 
+RUN tar zxvf amazon-corretto-11-x64-linux-jdk.tar.gz -C /opt/
 
-# will add auto install(/opt/amazon-corretto-11-x64-linux-jdk, ln -s /opt/amazon-corretto-11-x64-linux-jdk /opt/java)
-# and add path(~/.java.env(JAVA_HOME etc)), 
-# change work directory(/root/src/ -> /usr/local/src/)
+RUN ln -s /opt/amazon-corretto-11.0.12.7.1-linux-x64 /opt/java
+
+RUN echo "#!/bin/sh" > /etc/profile.d/java.sh
+RUN echo "export JAVA_HOME=/opt/java" >> /etc/profile.d/java.sh
+RUN echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> /etc/profile.d/java.sh
+RUN echo "export CLASSPATH=." >> /etc/profile.d/java.sh
+
+WORKDIR /usr/local/src

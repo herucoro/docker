@@ -1,7 +1,7 @@
 version: '3.7'
 services:
     db:
-        image: postgres:13.4
+        image: postgres:latest
         container_name: sb_db
         # ports:
             # - 5432:5432
@@ -15,16 +15,18 @@ services:
 
     java:
         build: .
-        # image: amazonlinux:latest
         container_name: sb_app
         ports: 
             - 8080:8080
+        volumes:
+            - java_volume:/usr/local/src
         tty: true
-        privileged: true               
         depends_on: 
             - db
         restart: always           
 
 volumes:
     postgres_volume:
+        external: true
+    java_volume:
         external: true
