@@ -27,3 +27,5 @@ services:
 volumes:
   postgres_volume:
     external: true
+  java_volume:
+    external: true
