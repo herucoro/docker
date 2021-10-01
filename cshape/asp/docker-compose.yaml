@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+    db:
+        image: postgres:latest
+        container_name: asp_db
+        ports:
+            - 5432:5432
+        volumes:
+            - postgres_volume:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER: dev_asp
+            POSTGRES_PASSWORD: password
+            POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+        restart: always
+
+    app:
+        build: .
+        container_name: asp_app
+        ports: 
+            - 80:80
+            - 5001:5001            
+        volumes:
+            - asp_volume:/usr/local/src
+        tty: true
+        depends_on: 
+            - db
+        restart: always
+
+volumes:
+    postgres_volume:
+        external: true
+    asp_volume:
+        external: true     
