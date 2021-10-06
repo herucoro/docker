@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  app:
+    build: .
+    container_name: uml_app
+    volumes:
+      - uml_volume:/usr/local/src
+    tty: true
+    restart: always
+
+volumes:
+  uml_volume:
+    external: true
