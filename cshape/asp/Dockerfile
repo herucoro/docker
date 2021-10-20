@@ -1,15 +1,19 @@
-FROM almalinux:latest
+FROM ubuntu:latest
 USER root
 
 ENV TZ JST-9
 ENV TERM xterm
 
-RUN dnf update -y
-RUN yum update -y
-RUN dnf install vim nodejs npm wget tar git httpd httpd-tools httpd-devel httpd-manual -y
+RUN apt upgrade -y
+RUN apt-get upgrade -y
+RUN apt-get update -y
+RUN apt update -y
+# RUN apt install vim nodejs npm wget tar git httpd httpd-tools httpd-devel httpd-manual -y
+# RUN apt install vim nodejs npm wget tar git apache2 -y
+RUN apt install vim wget tar git apache2 -y
 
-RUN dnf module reset nodejs -y
-RUN dnf module install nodejs:14 -y
+# RUN apt module reset nodejs -y
+# RUN apt module install nodejs:14 -y
 
 RUN mkdir /usr/local/src/download
 RUN cd /usr/local/src/download
@@ -33,5 +37,5 @@ RUN source /etc/profile.d/dotnet.sh
 # update dotnet ef commamd
 RUN dotnet tool update --global dotnet-ef
 
-RUN npm install -g npm-check-updates
-RUN npm update
+# RUN npm install -g npm-check-updates
+# RUN npm update
