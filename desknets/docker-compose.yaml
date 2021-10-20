@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+    app:
+        build: .
+        ports: 
+            - 80:80
+            - 22:22
+        volumes: 
+            - desknets_file_volume:/var/www/cgi-bin/dneo/file/
+            - desknets_wmldata_volume:/var/www/cgi-bin/dneo/wmldata/
+            - desknets_postgresql_volume:/var/pgsql/data/
+        tty: true
+        privileged: true
+        command: /sbin/init
+
+volumes: 
+    desknets_file_volume:
+        external: true
+    desknets_wmldata_volume:
+        external: true
+    desknets_postgresql_volume:
+        external: true
