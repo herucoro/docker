@@ -20,10 +20,11 @@ RUN mkdir /usr/local/src/download
 RUN cd /usr/local/src/download
 
 # Download .NET6 SDK
-RUN wget https://download.visualstudio.microsoft.com/download/pr/5fcb98bb-21e1-47a5-bb8e-bb25f41a3e52/04811d5d05b7e694f040d2a13c1aae4c/dotnet-sdk-6.0.100-rc.1.21463.6-linux-x64.tar.gz
+RUN wget https://download.visualstudio.microsoft.com/download/pr/ede8a287-3d61-4988-a356-32ff9129079e/bdb47b6b510ed0c4f0b132f7f4ad9d5a/dotnet-sdk-6.0.101-linux-x64.tar.gz
+
 
 RUN mkdir /opt/dotnet
-RUN tar zxvf dotnet-sdk-6.0.100-rc.1.21463.6-linux-x64.tar.gz -C /opt/dotnet
+RUN tar zxvf dotnet-sdk-6.0.101-linux-x64.tar.gz -C /opt/dotnet
 
 # add dotnet command path
 RUN echo "#!/bin/sh" > /etc/profile.d/dotnet.sh

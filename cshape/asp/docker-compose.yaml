@@ -5,29 +5,29 @@ services:
         container_name: asp_db
         ports:
             - 5432:5432
-        volumes:
-            - postgres_volume:/var/lib/postgresql/data
+        # volumes:
+        #     - postgres_volume:/var/lib/postgresql/data
         environment:
             POSTGRES_USER: dev_asp
             POSTGRES_PASSWORD: password
             POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
-        restart: always
+        # restart: always
 
     app:
         build: .
-        container_name: asp_app
+        container_name: asp_backApp
         ports: 
             - 80:80
             - 5001:5001            
-        volumes:
-            - asp_volume:/usr/local/src
+        # volumes:
+        #     - asp_volume:/usr/local/src
         tty: true
         depends_on: 
             - db
-        restart: always
+        # restart: always
 
-volumes:
-    postgres_volume:
-        external: true
-    asp_volume:
-        external: true     
+# volumes:
+#     postgres_volume:
+#         external: true
+#     asp_volume:
+#         external: true     
