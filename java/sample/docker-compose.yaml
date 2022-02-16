@@ -5,8 +5,8 @@ services:
         container_name: sb_db
         ports:
             - 5432:5432
-        volumes:
-            - postgres_volume:/var/lib/postgresql/data
+        # volumes:
+        #     - postgres_volume:/var/lib/postgresql/data
         environment:
             POSTGRES_USER: dev
             POSTGRES_PASSWORD: password
@@ -18,15 +18,15 @@ services:
         container_name: sb_app
         ports: 
             - 8080:8080
-        volumes:
-            - java_volume:/usr/local/src
+        # volumes:
+        #     - java_volume:/usr/local/src
         tty: true
         depends_on: 
             - db
         restart: always           
 
-volumes:
-    postgres_volume:
-        external: true
-    java_volume:
-        external: true
+# volumes:
+#     postgres_volume:
+#         external: true
+#     java_volume:
+#         external: true
