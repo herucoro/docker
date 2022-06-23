@@ -10,3 +10,4 @@ services:
             - 80:80
         privileged: true
         command: /sbin/init
+        
