@@ -1,0 +1,10 @@
+version: '3.7'
+services:    
+
+    web:
+        build: .        
+        container_name: CheckTrend_Python3
+        tty: true
+        ports: 
+            - 8000:8000
+        
